@@ -1,0 +1,107 @@
+{
+    "mni_data": {
+        "years": [2019, 2020, 2021, 2022, 2023],
+        "revenus_interets": [120.5, 118.7, 115.9, 125.4, 122.1],
+        "depenses_interets": [54.5, 51.5, 49.0, 55.5, 58.2],
+        "actifs_productifs_moyens": [2200, 2250, 2300, 2400, 2500],
+        "mni_values": [66.0, 67.2, 66.9, 69.9, 63.9],
+        "mni_percentage": [3.0, 2.98, 2.91, 2.91, 2.56]
+    },
+    "eve_data": {
+        "years": [2019, 2020, 2021, 2022, 2023],
+        "scenarios": {
+            "baseline": [1000, 1020, 1050, 1080, 1100],
+            "up_200bps": [920, 950, 980, 1010, 1040],
+            "down_200bps": [1080, 1090, 1120, 1150, 1160]
+        },
+        "impact": {
+            "up_200bps": [-8.0, -6.9, -6.7, -6.5, -5.5],
+            "down_200bps": [8.0, 6.9, 6.7, 6.5, 5.5]
+        },
+        "durations": {
+            "actifs": 4.5,
+            "passifs": 3.2
+        }
+    },
+    "gap_taux_data": {
+        "years": [2019, 2020, 2021, 2022, 2023],
+        "actifs_sensibles": {
+            "prets_taux_variable": [450, 470, 485, 500, 520],
+            "obligations_court_terme": [200, 210, 215, 225, 230],
+            "autres_actifs_sensibles": [150, 155, 160, 165, 170]
+        },
+        "passifs_sensibles": {
+            "depots_taux_variable": [380, 395, 410, 425, 440],
+            "emprunts_court_terme": [220, 225, 230, 235, 240],
+            "autres_passifs_sensibles": [120, 125, 130, 135, 140]
+        }
+    },
+    "gap_liquidite_data": {
+        "years": [2019, 2020, 2021, 2022, 2023],
+        "entrees_prevues": {
+            "remboursements_prets": [250, 260, 265, 270, 275],
+            "revenus_placements": [120, 125, 130, 135, 140],
+            "commissions": [80, 82, 85, 87, 90]
+        },
+        "sorties_prevues": {
+            "retraits_clients": [200, 210, 215, 220, 225],
+            "charges_exploitation": [150, 155, 160, 165, 170],
+            "remboursements_emprunts": [70, 72, 75, 77, 80]
+        },
+        "periodes": ["1M", "3M", "6M", "1Y"],
+        "gaps_par_periode": {
+            "1M": [30, 32, 35, 37, 40],
+            "3M": [80, 85, 87, 90, 92],
+            "6M": [120, 125, 130, 135, 140],
+            "1Y": [180, 185, 190, 195, 200]
+        }
+    },
+    "lcr_data": {
+        "years": [2019, 2020, 2021, 2022, 2023],
+        "actifs_liquides": {
+            "cash": [150, 155, 160, 165, 170],
+            "bons_tresor": [300, 310, 315, 320, 325],
+            "obligations_souveraines": [250, 255, 260, 265, 270]
+        },
+        "sorties_nettes": {
+            "retraits_depots": [400, 410, 415, 420, 425],
+            "tirages_credits": [150, 155, 160, 165, 170],
+            "autres_sorties": [100, 105, 110, 115, 120]
+        },
+        "lcr_ratio": [125.5, 127.8, 128.4, 129.2, 130.1]
+    },
+    "nsfr_data": {
+        "years": [2019, 2020, 2021, 2022, 2023],
+        "financement_stable_disponible": {
+            "capital": [180, 185, 190, 195, 200],
+            "depots_stables": [850, 870, 890, 910, 930],
+            "financement_long_terme": [420, 430, 440, 450, 460]
+        },
+        "financement_stable_requis": {
+            "prets_long_terme": [900, 920, 940, 960, 980],
+            "titres": [350, 360, 370, 380, 390],
+            "engagements_hors_bilan": [120, 125, 130, 135, 140]
+        },
+        "nsfr_ratio": [115.2, 116.5, 117.1, 117.8, 118.4]
+    },
+    "position_change_data": {
+        "years": [2019, 2020, 2021, 2022, 2023],
+        "devises": {
+            "USD": {
+                "actifs": [8500, 9200, 8400, 9800, 9200],
+                "passifs": [7800, 8600, 7900, 9100, 8800],
+                "taux_change": [1.12, 1.18, 1.15, 1.08, 1.05]
+            },
+            "GBP": {
+                "actifs": [4800, 5200, 4400, 5300, 4600],
+                "passifs": [4200, 4800, 4000, 4900, 4200],
+                "taux_change": [0.85, 0.89, 0.86, 0.88, 0.87]
+            },
+            "JPY": {
+                "actifs": [320000, 340000, 350000, 360000, 370000],
+                "passifs": [300000, 310000, 330000, 340000, 350000],
+                "taux_change": [120.5, 123.8, 129.5, 131.2, 128.4]
+            }
+        }
+    }
+} 

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicateurs Bancaires</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .dashboard-title {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .plots-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .plot-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .plot-card h2 {
+            color: #34495e;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .plot-card img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 30px auto;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .plot-description {
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.6;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="dashboard-title">Dashboard des Indicateurs Bancaires</h1>
+    <div class="plots-container">
+        <div class="plot-card">
+            <h2>Marge Nette d'Intérêt (MNI)</h2>
+            <img src="data:image/png;base64,{{ plots.mni_plot }}" alt="MNI Plot">
+            <div class="plot-description">
+                <h3>Définition</h3>
+                <p>La Marge Nette d'Intérêt (MNI) représente la différence entre les revenus d'intérêts 
+                et les charges d'intérêts. C'est un indicateur clé de la rentabilité bancaire.</p>
+
+                <p>Le MNI affiche une baisse continue entre 2019 et 2023, passant de 3,0 % à 2,56 %, avec une chute marquée en 2023. Cette évolution résulte d’une diminution des revenus d’intérêts (de 5,5 % à 4,9 %) alors que les charges d’intérêts restent relativement stables autour de 2,3 %. La contraction de la MNI reflète une pression sur la rentabilité bancaire, probablement due à un environnement de taux bas ou une concurrence accrue. Une vigilance accrue est nécessaire pour éviter de franchir le seuil critique de 2 %, impliquant des ajustements stratégiques pour stabiliser la performance financière.</p>
+                
+                <h3>Composantes</h3>
+                <ul>
+                    <li><strong>Revenus d'intérêts :</strong> Intérêts reçus sur les prêts accordés</li>
+                    <li><strong>Charges d'intérêts :</strong> Intérêts versés sur les dépôts clients</li>
+                </ul>
+                
+                <h3>Interprétation</h3>
+                <ul>
+                    <li>MNI > 3% : Performance excellente</li>
+                    <li>2% < MNI < 3% : Performance satisfaisante</li>
+                    <li>MNI < 2% : Performance à surveiller</li>
+                </ul>
+                
+                <h3>Analyse de l'évolution</h3>
+                <p>Sur la période 2019-2023, on observe :</p>
+                <ul>
+                    <li>Une stabilité relative entre 2019 et 2021</li>
+                    <li>Un pic en 2022 à 69.9 Mrd€</li>
+                    <li>Une baisse significative en 2023 due à la hausse des taux directeurs</li>
+                </ul>
+            </div>
+        </div>
+        <div class="plot-card">
+            <h2>Economic Value of Equity (EVE)</h2>
+            <img src="data:image/png;base64,{{ plots.eve_plot }}" alt="EVE Plot">
+            <div class="plot-description">
+                <h3>Définition</h3>
+                <p>L'EVE mesure la variation de la valeur économique de la banque face aux changements de taux d'intérêt.</p>
+
+                <p>Son évolution montre une croissance régulière dans le scénario de référence, indiquant une amélioration de la valeur économique de la banque entre 2019 et 2023. Cependant, l’analyse des scénarios de variation des taux d’intérêt (+200 bps et -200 bps) révèle un impact asymétrique : une hausse des taux réduit l’EVE, tandis qu’une baisse des taux l’augmente significativement. Cet effet, visible sur le graphique de droite, souligne la sensibilité de la valeur économique aux fluctuations des taux. Une gestion active du risque de taux est donc essentielle pour préserver la stabilité financière de l’institution.</p>
+                
+                <h3>Analyse des scénarios</h3>
+                <ul>
+                    <li><strong>Scénario de base :</strong> Projection avec les taux actuels</li>
+                    <li><strong>Choc +200bps :</strong> Impact d'une hausse de 2% des taux</li>
+                    <li><strong>Choc -200bps :</strong> Impact d'une baisse de 2% des taux</li>
+                </ul>
+                
+                <h3>Interprétation</h3>
+                <ul>
+                    <li>Impact < 15% : Position de risque acceptable</li>
+                    <li>Impact > 15% : Nécessite des mesures de couverture</li>
+                </ul>
+                
+                <h3>Duration</h3>
+                <p>Actifs : {{ eve_data.durations.actifs }} ans<br>
+                   Passifs : {{ eve_data.durations.passifs }} ans</p>
+            </div>
+        </div>
+        <div class="plot-card">
+            <h2>GAP de Taux</h2>
+            <img src="data:image/png;base64,{{ plots.gap_taux_plot }}" alt="GAP Taux Plot">
+            <div class="plot-description">
+                <h3>Définition</h3>
+                <p>Le GAP de taux mesure la différence entre les actifs et passifs sensibles aux variations 
+                de taux d'intérêt. Un GAP positif indique une exposition favorable en cas de hausse des taux.</p>
+
+                <p>L’évolution du GAP de taux montre une augmentation progressive entre 2019 et 2023, passant de 80 à 100 milliards d’euros. Cette tendance indique un accroissement des actifs sensibles aux taux par rapport aux passifs sensibles, suggérant une exposition croissante aux variations des taux d’intérêt. Un GAP positif signifie que la banque bénéficie d’une hausse des taux, car ses actifs réajustent leurs rendements plus rapidement que ses passifs. Toutefois, cette situation peut aussi exposer l’institution à un risque accru en cas de baisse des taux, nécessitant une gestion prudente de l’équilibre entre actifs et passifs sensibles.</p>
+                
+                <h3>Composition</h3>
+                <ul>
+                    <li><strong>Actifs sensibles :</strong> Prêts à taux variable, obligations court terme</li>
+                    <li><strong>Passifs sensibles :</strong> Dépôts à taux variable, emprunts court terme</li>
+                </ul>
+                
+                <h3>Interprétation</h3>
+                <ul>
+                    <li>GAP > 0 : Bénéfice d'une hausse des taux</li>
+                    <li>GAP < 0 : Risque en cas de hausse des taux</li>
+                </ul>
+            </div>
+        </div>
+        <div class="plot-card">
+            <h2>GAP de Liquidité</h2>
+            <img src="data:image/png;base64,{{ plots.gap_liquidite_plot }}" alt="GAP Liquidité Plot">
+            <div class="plot-description">
+                <h3>Définition</h3>
+                <p>Le GAP de liquidité mesure la différence entre les entrées et sorties de trésorerie prévues sur différentes périodes.</p>
+
+                <p>Ici, il montre une augmentation progressive entre 2019 et 2023, indiquant un renforcement des entrées de trésorerie par rapport aux sorties sur différentes périodes. Cette évolution traduit une amélioration de la capacité de la banque à couvrir ses besoins de liquidité, réduisant ainsi son exposition au risque de liquidité. Toutefois, bien que le solde reste positif, il convient de surveiller l’équilibre entre les échéances à court et long terme afin d’assurer une gestion optimale des flux de trésorerie et de prévenir d’éventuelles tensions en cas de choc de liquidité.</p>
+                
+                <h3>Composantes</h3>
+                <ul>
+                    <li><strong>Entrées :</strong> Remboursements de prêts, revenus des placements, commissions</li>
+                    <li><strong>Sorties :</strong> Retraits clients, charges d'exploitation, remboursements d'emprunts</li>
+                </ul>
+                
+                <h3>Périodes d'analyse</h3>
+                <ul>
+                    <li>1M : Court terme (1 mois)</li>
+                    <li>3M : Moyen terme (3 mois)</li>
+                    <li>6M : Moyen-long terme (6 mois)</li>
+                    <li>1Y : Long terme (1 an)</li>
+                </ul>
+                
+                <h3>Interprétation</h3>
+                <ul>
+                    <li>GAP > 0 : Excédent de liquidité</li>
+                    <li>GAP < 0 : Besoin de refinancement</li>
+                </ul>
+            </div>
+        </div>
+        <div class="plot-card">
+            <h2>Liquidity Coverage Ratio (LCR)</h2>
+            <img src="data:image/png;base64,{{ plots.lcr_plot }}" alt="LCR Plot">
+            <div class="plot-description">
+                <h3>Définition</h3>
+                <p>Le LCR mesure la capacité de la banque à faire face à ses besoins de liquidité à court terme (30 jours) 
+                en situation de stress.</p>
+
+                <p>Ici, il affiche une progression constante entre 2019 et 2023, passant de 125,5 % à 130,1 %, bien au-dessus du seuil réglementaire de 100 %. Cette tendance indique que la banque dispose d’un niveau d’actifs liquides suffisant pour couvrir ses sorties nettes de trésorerie en situation de stress sur 30 jours. L’augmentation des actifs liquides par rapport aux sorties nettes renforce cette résilience. Toutefois, il est essentiel de maintenir cette dynamique pour faire face à d’éventuelles tensions de liquidité tout en optimisant l’allocation des ressources financières.</p>
+                
+                <h3>Composantes</h3>
+                <ul>
+                    <li><strong>Actifs liquides :</strong> Cash, bons du Trésor, obligations souveraines</li>
+                    <li><strong>Sorties nettes :</strong> Retraits de dépôts, tirages de crédits</li>
+                </ul>
+                
+                <h3>Interprétation</h3>
+                <ul>
+                    <li>LCR > 100% : Conforme à la réglementation</li>
+                    <li>LCR > 120% : Position de liquidité confortable</li>
+                    <li>LCR < 100% : Non-conformité réglementaire</li>
+                </ul>
+                
+                <h3>Analyse</h3>
+                <p>Le ratio LCR de la banque est en amélioration constante, passant de 125.5% en 2019 à 130.1% en 2023, 
+                largement au-dessus du minimum réglementaire de 100%.</p>
+            </div>
+        </div>
+        <div class="plot-card">
+            <h2>Net Stable Funding Ratio (NSFR)</h2>
+            <img src="data:image/png;base64,{{ plots.nsfr_plot }}" alt="NSFR Plot">
+            <div class="plot-description">
+                <h3>Définition</h3>
+                <p>Le NSFR mesure la stabilité du financement à long terme de la banque. Il compare les sources 
+                de financement stable aux besoins de financement à long terme.</p>
+
+                <p>Le NSFR suit une tendance haussière entre 2019 et 2023, passant de 115,2 % à 118,4 %, restant bien au-dessus du seuil réglementaire de 100 %. Cette évolution témoigne d’un renforcement de la capacité de la banque à financer ses actifs à long terme avec des sources stables. L’augmentation progressive du financement disponible par rapport au financement requis illustre une gestion prudente du risque de liquidité structurel. Cette situation permet à la banque de mieux faire face aux chocs de marché, garantissant une solidité financière durable.</p
+                
+                <h3>Composantes</h3>
+                <ul>
+                    <li><strong>Financement stable disponible :</strong> Capital, dépôts stables, financement long terme</li>
+                    <li><strong>Financement stable requis :</strong> Prêts long terme, titres, engagements hors bilan</li>
+                </ul>
+                
+                <h3>Interprétation</h3>
+                <ul>
+                    <li>NSFR > 100% : Exigence réglementaire respectée</li>
+                    <li>NSFR > 115% : Position confortable</li>
+                    <li>NSFR < 100% : Non-conformité réglementaire</li>
+                </ul>
+            </div>
+        </div>
+        <div class="plot-card">
+            <h2>GAP Combiné Taux/Liquidité</h2>
+            <img src="data:image/png;base64,{{ plots.gap_combine_plot }}" alt="GAP Combiné Plot">
+            <div class="plot-description">
+                <h3>Définition</h3>
+                <p>Le GAP combiné taux/liquidité permet d'analyser simultanément l'exposition aux risques de taux 
+                et de liquidité. Il offre une vue consolidée de la position de la banque.</p>
+
+                <p>L’évolution du GAP combiné taux/liquidité montre une progression régulière entre 2019 et 2023, avec une augmentation simultanée du GAP de taux et du GAP de liquidité. Cette tendance indique que la banque renforce progressivement son exposition aux risques de taux et de liquidité. La matrice taux/liquidité illustre cette dynamique, où les indicateurs évoluent vers des niveaux plus élevés au fil du temps.
+
+                    Cette situation suggère une augmentation du volume des actifs et passifs sensibles aux variations des taux et des flux de trésorerie. Bien que la croissance du GAP puisse traduire une meilleure gestion des liquidités et des taux d’intérêt, elle implique également un besoin accru de surveillance afin d’éviter un déséquilibre excessif. Une gestion prudente de cette exposition reste essentielle pour préserver la stabilité financière de l’institution.</p>
+                
+                <h3>Composantes</h3>
+                <ul>
+                    <li><strong>GAP de Taux :</strong> Différence entre actifs et passifs sensibles aux taux</li>
+                    <li><strong>GAP de Liquidité :</strong> Différence entre entrées et sorties de trésorerie</li>
+                </ul>
+                
+                <h3>Périodes d'analyse</h3>
+                <ul>
+                    <li>Court terme : 1-3 mois</li>
+                    <li>Moyen terme : 3-12 mois</li>
+                    <li>Long terme : > 12 mois</li>
+                </ul>
+                
+                <h3>Interprétation</h3>
+                <ul>
+                    <li><strong>Zone verte :</strong> GAPs positifs en taux et liquidité</li>
+                    <li><strong>Zone orange :</strong> GAP positif dans une dimension, négatif dans l'autre</li>
+                    <li><strong>Zone rouge :</strong> GAPs négatifs dans les deux dimensions</li>
+                </ul>
+            </div>
+        </div>
+        <div class="plot-card">
+            <h2>Position de Change</h2>
+            <img src="data:image/png;base64,{{ plots.position_change_plot }}" alt="Position Change Plot">
+            <div class="plot-description">
+                <h3>Définition</h3>
+                <p>La position de change mesure l'exposition de la banque aux fluctuations des taux de change pour chaque devise.</p>
+                
+                <h3>Analyse des risques</h3>
+                <ul>
+                    <li><strong>USD :</strong> Position longue modérée, exposition principale</li>
+                    <li><strong>GBP :</strong> Position équilibrée, risque limité</li>
+                    <li><strong>JPY :</strong> Position courte, nécessite surveillance</li>
+                </ul>
+                
+                <h3>Limites de risque</h3>
+                <ul>
+                    <li>Position maximale par devise : ±20M devise</li>
+                    <li>Exposition totale maximale : 50M€</li>
+                    <li>Stop-loss par position : -5M€</li>
+                </ul>
+                
+                <h3>Tendances 2023</h3>
+                <p>Les positions de change montrent une tendance à la réduction des expositions, 
+                particulièrement sur l'USD et le JPY, reflétant une approche plus prudente dans 
+                un contexte de volatilité accrue des marchés.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
