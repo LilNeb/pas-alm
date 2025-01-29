@@ -10,6 +10,7 @@ DescriptionCe projet est un outil de visualisation et d'analyse des indicateur
 
 Installation
 
+
 - Cloner le repository
 - Installer les dépendances : pip install -r requirements.txt
 - Lancer l'application : python app.py
